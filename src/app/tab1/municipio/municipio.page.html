@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1" [text]="''"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Precios </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="segmentTab" style="width: 80%; margin: 0 auto">
+    <ion-segment-button value="distance">
+      <ion-label>Distancia</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="price">
+      <ion-label>Precio</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-item>
+    <ion-label style="color: rgb(25, 133, 255); font-size: xx-large; font-weight: 500">
+      {{ nameMunicipio }}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-range min="10" max="200" step="10" pin snaps="true" ticks="false" color="secondary" debounce="500"
+      [(ngModel)]="rangeDistance" (ionChange)="rangeChanged($event)">
+      <ion-label slot="start">10km</ion-label>
+      <ion-label slot="end">200km</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-list *ngIf="responseFiltered && !notFound">
+    <ion-item-sliding *ngFor="let cc of responseFiltered">
+      <ion-item>
+        <ion-label>
+          <h2>
+            {{ cc['Rótulo'] }}
+            <span style="color: gray; font-size: 12px">
+              ({{cc.distance | number: '1.0-2'}}km)
+            </span>
+          </h2>
+          <p>{{ cc['Dirección'] }}</p>
+        </ion-label>
+
+        <ion-label style="text-align: right">
+          <h3>Diesel: {{ cc['Precio Gasoleo A'] }}</h3>
+          <h3>Gasolina: {{ cc['Precio Gasolina 95 E5'] }}</h3>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="warning">Favoritos</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngIf="notFound">
+    <ion-item>
+      <ion-label>
+        <h2>No se han encontrado resultados.</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
