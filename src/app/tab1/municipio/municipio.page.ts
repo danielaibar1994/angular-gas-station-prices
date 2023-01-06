@@ -112,7 +112,6 @@ export class MunicipioPage implements OnInit {
 
     if (this.selectedMunicipio) {
       this.pricesList.forEach((element) => {
-        // eslint-disable-next-line @typescript-eslint/dot-notation
         const lat1 = parseFloat(
           this.selectedMunicipio.Latitud.replace(/,/g, '.')
         );
