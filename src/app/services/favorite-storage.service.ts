@@ -7,7 +7,7 @@ export class FavoriteStorageService extends LocalStorageService {
     myLocalStorageTag = 'myFavoriteStorage';
     storageType: 'ONE' | 'MULTIPLE' = 'MULTIPLE';
     parameterId = 'IDMunicipio';
-    repeatedData = false;
+    duplicateData = false;
 
     constructor() {
         super();
