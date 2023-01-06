@@ -10,7 +10,7 @@ export class LocalStorageService {
     myLocalStorageTag = 'myLocalStorage';
     storageType: 'ONE' | 'MULTIPLE' = 'ONE';
     parameterId = 'id';
-    repeatedData = true;
+    duplicateData = true;
 
     private localStorage = localStorage;
 
@@ -55,7 +55,7 @@ export class LocalStorageService {
         let localData = JSON.parse(this.localStorage.getItem(this.myLocalStorageTag));
         localData = !!localData?.length ? localData : [];
 
-        if (this.repeatedData) {
+        if (this.duplicateData) {
             localData.push(data);
         } else {
             const found = localData.some((item) => item[this.parameterId].toString() === data[this.parameterId].toString());
